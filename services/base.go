@@ -26,6 +26,7 @@ func CreateAPIConnector() Base {
 func (b BaseImpl) Broadcast(message *models.CreateBroadcast) (response models.CreateBroadcastResponse, err error) {
 	if message == nil {
 		err = configs.ErrNoInput
+
 		return response, err
 	}
 
@@ -55,7 +56,7 @@ func (b BaseImpl) Broadcast(message *models.CreateBroadcast) (response models.Cr
 		return
 	}
 
-	return models.CreateBroadcastResponse{}, nil
+	return response, nil
 }
 
 func (b BaseImpl) Monitor(message *models.GetTransaction) (response models.GetTransactionResponse, err error) {
@@ -64,7 +65,7 @@ func (b BaseImpl) Monitor(message *models.GetTransaction) (response models.GetTr
 		return
 	}
 
-	url := fmt.Sprintf("%s/check/%s", configs.Node, *message)
+	url := fmt.Sprintf("%s/check/%s", configs.Node, message.TxHash)
 
 	resp, err := http.Get(url)
 	if err != nil {

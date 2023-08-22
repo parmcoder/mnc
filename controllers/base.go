@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+
 	"github.com/parmcoder/transaction-tracker/models"
 	"github.com/parmcoder/transaction-tracker/services"
 )
@@ -25,7 +26,13 @@ func CreateController(ac *services.Base) Base {
 }
 
 func (c BaseImpl) Create(ctx echo.Context) error {
-	message := models.CreateBroadcast{}
+	var message models.CreateBroadcast
+
+	err := ctx.Bind(&message)
+	if err != nil {
+		return ctx.String(http.StatusBadRequest, err.Error())
+	}
+
 	response, err := (*c.apiConnector).Broadcast(&message)
 	if err != nil {
 		return ctx.String(http.StatusInternalServerError, err.Error())
@@ -34,11 +41,16 @@ func (c BaseImpl) Create(ctx echo.Context) error {
 }
 
 func (c BaseImpl) Monitor(ctx echo.Context) error {
-	message := models.GetTransaction{}
+	var message models.GetTransaction
+
+	hashMessage := ctx.Param("hash")
+	message.TxHash = hashMessage
+
 	response, err := (*c.apiConnector).Monitor(&message)
 	if err != nil {
 		return ctx.String(http.StatusInternalServerError, err.Error())
 	}
+
 	return ctx.JSON(http.StatusOK, response)
 }
 

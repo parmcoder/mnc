@@ -12,7 +12,7 @@ func Setup() *echo.Echo {
 	c := controllers.CreateController(&ac)
 
 	e.GET("/", c.HealthCheck)
-	e.GET("/monitor", c.Monitor)
+	e.GET("monitor/:hash", c.Monitor)
 	e.POST("/", c.Create)
 
 	return e

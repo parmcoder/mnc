@@ -19,6 +19,8 @@ func TestBaseImpl_Broadcast(t *testing.T) {
 		Timestamp: 100123,
 	}
 
+	message2 := models.CreateBroadcast{}
+
 	tests := []struct {
 		name         string
 		args         args
@@ -29,6 +31,12 @@ func TestBaseImpl_Broadcast(t *testing.T) {
 		{
 			name:         "Success",
 			args:         args{message: &message1},
+			wantResponse: models.CreateBroadcastResponse{},
+			wantErr:      false,
+		},
+		{
+			name:         "Success - empty",
+			args:         args{message: &message2},
 			wantResponse: models.CreateBroadcastResponse{},
 			wantErr:      false,
 		},
@@ -60,6 +68,10 @@ func TestBaseImpl_Monitor(t *testing.T) {
 	}
 
 	message1 := models.GetTransaction{
+		TxHash: "abc",
+	}
+
+	message2 := models.GetTransaction{
 		TxHash: "",
 	}
 
@@ -78,6 +90,12 @@ func TestBaseImpl_Monitor(t *testing.T) {
 				TxStatus: configs.DoNotExist,
 			},
 			wantErr: false,
+		},
+		{
+			name:         "Failed - cannot process input",
+			args:         args{message: &message2},
+			wantResponse: models.GetTransactionResponse{},
+			wantErr:      true,
 		},
 		{
 			name:         "Failed - no input",
