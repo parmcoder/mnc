@@ -22,11 +22,11 @@ This is the module we used to connect to the server
 1. **Broadcast Transaction**:
  Construct a JSON payload and send a POST request to `https://mock-node-wgqbnxruha-as.a.run.app/broadcast`. The payload structure is as follows:
 
-    ```json
-    {
-        "symbol": "string",          // Transaction symbol, e.g., BTC
-        "price": uint64,             // Symbol price, e.g., 100000
-        "timestamp": uint64          // Timestamp of price retrieval
+    ```go
+    type CreateBroadcast struct {
+        Symbol    string `json:"symbol"`
+        Price     uint64 `json:"price"`
+        Timestamp uint64 `json:"timestamp"`
     }
     ```
 
@@ -43,6 +43,11 @@ This is the module we used to connect to the server
 
 2. **Transaction Status Monitoring**: Utilize the transaction hash obtained from the response to periodically issue GET requests to `https://mock-node-wgqbnxruha-as.a.run.app/check/<tx_hash>`.
 
+    ```go
+    type GetTransaction struct {
+	    TxHash string `json:"tx_hash"`
+    }
+    ```
     Example usage
 
     ```go
@@ -52,4 +57,40 @@ This is the module we used to connect to the server
         if err != nil {
             return err
         }
+    ```
+
+## Server - Service integration
+Change your directory to `server` folder and run the server using
+```
+go run main.go
+```
+
+### Endpoints
+1. **Broadcast Transaction**
+- METHOD: POST
+- PATH: /mnc
+- BODY:  
+    ```json
+    {
+        "symbol": "string",     // Transaction symbol, e.g., BTC
+        "price": 2,             // Symbol price, e.g., 100000
+        "timestamp": 1          // Timestamp of price retrieval
+    }
+    ```
+- Example:
+    ```
+    curl --location 'localhost:1323/mnc' \
+    --header 'Content-Type: application/json' \
+    --data '{
+        "symbol": "ETH",
+        "price": 45000,
+        "timestamp": 167891234235
+    }'
+    ```
+2. **Transaction Status Monitoring**
+- METHOD: GET
+- PATH: /mnc/<tx_hash>
+- Example:
+    ```
+    curl --location 'localhost:1323/mnc/6774392a2a2e67efd2cd61b366dfcc2046bdec4ffc9a6f77ed98b88995f5f241'
     ```

@@ -13,9 +13,9 @@ func Setup() *echo.Echo {
 	ac := mnc.CreateAPIConnector()
 	c := controllers.CreateController(&ac)
 
-	e.GET("/", c.HealthCheck)
-	e.GET("monitor/:hash", c.Monitor)
-	e.POST("/", c.Create)
+	e.GET("health", c.HealthCheck)
+	e.GET("mnc/:hash", c.Monitor)
+	e.POST("mnc", c.Create)
 
 	return e
 }
