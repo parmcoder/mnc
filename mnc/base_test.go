@@ -5,6 +5,10 @@ import (
 	"testing"
 )
 
+/*
+ Disclaimer:
+ This test is run against the real server. So, we can use
+*/
 func TestBaseImpl_Broadcast(t *testing.T) {
 	type args struct {
 		message *CreateBroadcast
@@ -21,26 +25,25 @@ func TestBaseImpl_Broadcast(t *testing.T) {
 	tests := []struct {
 		name         string
 		args         args
-		wantResponse CreateBroadcastResponse
+		wantResponse bool
 		wantErr      bool
 	}{
-		// TODO: Add test cases.
 		{
 			name:         "Success",
 			args:         args{message: &message1},
-			wantResponse: CreateBroadcastResponse{},
+			wantResponse: true,
 			wantErr:      false,
 		},
 		{
 			name:         "Success - empty",
 			args:         args{message: &message2},
-			wantResponse: CreateBroadcastResponse{},
+			wantResponse: true,
 			wantErr:      false,
 		},
 		{
 			name:         "Failed - no input",
 			args:         args{message: nil},
-			wantResponse: CreateBroadcastResponse{},
+			wantResponse: false,
 			wantErr:      true,
 		},
 	}
@@ -52,7 +55,7 @@ func TestBaseImpl_Broadcast(t *testing.T) {
 				t.Errorf("BaseImpl.Broadcast() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if !reflect.DeepEqual(gotResponse, tt.wantResponse) {
+			if tt.wantResponse && len(gotResponse.TxHash) <= 0 {
 				t.Errorf("BaseImpl.Broadcast() = %v, want %v", gotResponse, tt.wantResponse)
 			}
 		})
@@ -79,7 +82,6 @@ func TestBaseImpl_Monitor(t *testing.T) {
 		wantResponse GetTransactionResponse
 		wantErr      bool
 	}{
-		// TODO: Add test cases.
 		{
 			name: "Success",
 			args: args{message: &message1},
