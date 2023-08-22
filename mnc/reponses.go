@@ -1,4 +1,4 @@
-package models
+package mnc
 
 type CreateBroadcastResponse struct {
 	TxHash string `json:"tx_hash"`

@@ -1,4 +1,4 @@
-package models
+package mnc
 
 type CreateBroadcast struct {
 	Symbol    string `json:"symbol"`

@@ -1,49 +1,46 @@
-package services
+package mnc
 
 import (
 	"reflect"
 	"testing"
-
-	"github.com/parmcoder/mnc/configs"
-	"github.com/parmcoder/mnc/models"
 )
 
 func TestBaseImpl_Broadcast(t *testing.T) {
 	type args struct {
-		message *models.CreateBroadcast
+		message *CreateBroadcast
 	}
 
-	message1 := models.CreateBroadcast{
+	message1 := CreateBroadcast{
 		Symbol:    "BTC",
 		Price:     1000,
 		Timestamp: 100123,
 	}
 
-	message2 := models.CreateBroadcast{}
+	message2 := CreateBroadcast{}
 
 	tests := []struct {
 		name         string
 		args         args
-		wantResponse models.CreateBroadcastResponse
+		wantResponse CreateBroadcastResponse
 		wantErr      bool
 	}{
 		// TODO: Add test cases.
 		{
 			name:         "Success",
 			args:         args{message: &message1},
-			wantResponse: models.CreateBroadcastResponse{},
+			wantResponse: CreateBroadcastResponse{},
 			wantErr:      false,
 		},
 		{
 			name:         "Success - empty",
 			args:         args{message: &message2},
-			wantResponse: models.CreateBroadcastResponse{},
+			wantResponse: CreateBroadcastResponse{},
 			wantErr:      false,
 		},
 		{
 			name:         "Failed - no input",
 			args:         args{message: nil},
-			wantResponse: models.CreateBroadcastResponse{},
+			wantResponse: CreateBroadcastResponse{},
 			wantErr:      true,
 		},
 	}
@@ -64,14 +61,14 @@ func TestBaseImpl_Broadcast(t *testing.T) {
 
 func TestBaseImpl_Monitor(t *testing.T) {
 	type args struct {
-		message *models.GetTransaction
+		message *GetTransaction
 	}
 
-	message1 := models.GetTransaction{
+	message1 := GetTransaction{
 		TxHash: "abc",
 	}
 
-	message2 := models.GetTransaction{
+	message2 := GetTransaction{
 		TxHash: "",
 	}
 
@@ -79,28 +76,28 @@ func TestBaseImpl_Monitor(t *testing.T) {
 		name         string
 		b            BaseImpl
 		args         args
-		wantResponse models.GetTransactionResponse
+		wantResponse GetTransactionResponse
 		wantErr      bool
 	}{
 		// TODO: Add test cases.
 		{
 			name: "Success",
 			args: args{message: &message1},
-			wantResponse: models.GetTransactionResponse{
-				TxStatus: configs.DoNotExist,
+			wantResponse: GetTransactionResponse{
+				TxStatus: DoNotExist,
 			},
 			wantErr: false,
 		},
 		{
 			name:         "Failed - cannot process input",
 			args:         args{message: &message2},
-			wantResponse: models.GetTransactionResponse{},
+			wantResponse: GetTransactionResponse{},
 			wantErr:      true,
 		},
 		{
 			name:         "Failed - no input",
 			args:         args{message: nil},
-			wantResponse: models.GetTransactionResponse{},
+			wantResponse: GetTransactionResponse{},
 			wantErr:      true,
 		},
 	}

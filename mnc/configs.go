@@ -1,4 +1,4 @@
-package configs
+package mnc
 
 const (
 	Confirmed  = "CONFIRMED"

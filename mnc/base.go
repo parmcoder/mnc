@@ -1,4 +1,4 @@
-package services
+package mnc
 
 import (
 	"bytes"
@@ -6,13 +6,11 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-
-	"github.com/parmcoder/mnc"
 )
 
 type Base interface {
-	Broadcast(message *mnc.CreateBroadcast) (mnc.CreateBroadcastResponse, error)
-	Monitor(message *mnc.GetTransaction) (mnc.GetTransactionResponse, error)
+	Broadcast(message *CreateBroadcast) (CreateBroadcastResponse, error)
+	Monitor(message *GetTransaction) (GetTransactionResponse, error)
 }
 
 type BaseImpl struct {
@@ -22,14 +20,14 @@ func CreateAPIConnector() Base {
 	return BaseImpl{}
 }
 
-func (b BaseImpl) Broadcast(message *mnc.CreateBroadcast) (response mnc.CreateBroadcastResponse, err error) {
+func (b BaseImpl) Broadcast(message *CreateBroadcast) (response CreateBroadcastResponse, err error) {
 	if message == nil {
-		err = mnc.ErrNoInput
+		err = ErrNoInput
 
 		return response, err
 	}
 
-	url := fmt.Sprintf("%s/broadcast", mnc.Node)
+	url := fmt.Sprintf("%s/broadcast", Node)
 
 	postBody, err := json.Marshal(*message)
 	if err != nil {
@@ -58,13 +56,13 @@ func (b BaseImpl) Broadcast(message *mnc.CreateBroadcast) (response mnc.CreateBr
 	return response, nil
 }
 
-func (b BaseImpl) Monitor(message *mnc.GetTransaction) (response mnc.GetTransactionResponse, err error) {
+func (b BaseImpl) Monitor(message *GetTransaction) (response GetTransactionResponse, err error) {
 	if message == nil {
-		err = mnc.ErrNoInput
+		err = ErrNoInput
 		return
 	}
 
-	url := fmt.Sprintf("%s/check/%s", mnc.Node, message.TxHash)
+	url := fmt.Sprintf("%s/check/%s", Node, message.TxHash)
 
 	resp, err := http.Get(url)
 	if err != nil {
