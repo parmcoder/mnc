@@ -24,6 +24,11 @@ func CreateAPIConnector() Base {
 }
 
 func (b BaseImpl) Broadcast(message *models.CreateBroadcast) (response models.CreateBroadcastResponse, err error) {
+	if message == nil {
+		err = configs.ErrNoInput
+		return
+	}
+
 	url := fmt.Sprintf("%s/broadcast", configs.Node)
 
 	postBody, err := json.Marshal(*message)
@@ -54,6 +59,11 @@ func (b BaseImpl) Broadcast(message *models.CreateBroadcast) (response models.Cr
 }
 
 func (b BaseImpl) Monitor(message *models.GetTransaction) (response models.GetTransactionResponse, err error) {
+	if message == nil {
+		err = configs.ErrNoInput
+		return
+	}
+
 	url := fmt.Sprintf("%s/check/%s", configs.Node, *message)
 
 	resp, err := http.Get(url)

@@ -1,11 +1,11 @@
 package models
 
 type CreateBroadcast struct {
-	Symbol    string
-	Price     uint64
-	Timestamp uint64
+	Symbol    string `json:"symbol"`
+	Price     uint64 `json:"price"`
+	Timestamp uint64 `json:"timestamp"`
 }
 
 type GetTransaction struct {
-	Tx_hash string
+	TxHash string `json:"tx_hash"`
 }

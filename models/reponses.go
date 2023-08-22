@@ -1,9 +1,9 @@
 package models
 
 type CreateBroadcastResponse struct {
-	Tx_hash string
+	TxHash string `json:"tx_hash"`
 }
 
 type GetTransactionResponse struct {
-	Tx_status string
+	TxStatus string `json:"tx_status"`
 }
