@@ -13,6 +13,8 @@ github.com/mattn/go-isatty v0.0.19 h1:JITubQf0MOLdlGRuRq+jtsDlekdYPia9ZFsB8h/APP
 github.com/mattn/go-isatty v0.0.19/go.mod h1:W+V8PltTTMOvKvAeJH7IuucS94S2C6jfK/D7dTCTo3Y=
 github.com/parmcoder/mnc v0.1.0 h1:hk/uxxlyefEbd7QWODbWOHA8yyThmgb7dlr+v1t6OwA=
 github.com/parmcoder/mnc v0.1.0/go.mod h1:UugHTwp4QeOfz5wFXcOWAs0dutGbTBIF8teGQ06YPvE=
+github.com/parmcoder/mnc v0.1.1 h1:tcKkVaihJFgIbvFQjyrmbzZfgG5HzGNwuNwC90nxvaw=
+github.com/parmcoder/mnc v0.1.1/go.mod h1:XZjOK+B/UROMovmERjPFTKvGA78xyH7Ms79RMXhVUOo=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
