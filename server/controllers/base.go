@@ -4,9 +4,6 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
-
-	"github.com/parmcoder/transaction-tracker/models"
-	"github.com/parmcoder/transaction-tracker/services"
 )
 
 type Base interface {
@@ -16,7 +13,7 @@ type Base interface {
 }
 
 type BaseImpl struct {
-	apiConnector *services.Base
+	apiConnector *node.Base
 }
 
 func CreateController(ac *services.Base) Base {

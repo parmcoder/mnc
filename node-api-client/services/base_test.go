@@ -4,8 +4,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/parmcoder/transaction-tracker/configs"
-	"github.com/parmcoder/transaction-tracker/models"
+	"github.com/parmcoder/mnc/configs"
+	"github.com/parmcoder/mnc/models"
 )
 
 func TestBaseImpl_Broadcast(t *testing.T) {

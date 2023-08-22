@@ -7,8 +7,8 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/parmcoder/transaction-tracker/configs"
-	"github.com/parmcoder/transaction-tracker/models"
+	"github.com/parmcoder/mnc/configs"
+	"github.com/parmcoder/mnc/models"
 )
 
 type Base interface {
