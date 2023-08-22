@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/parmcoder/mnc"
 )
 
 type Base interface {
@@ -13,17 +14,17 @@ type Base interface {
 }
 
 type BaseImpl struct {
-	apiConnector *node.Base
+	apiConnector *mnc.Base
 }
 
-func CreateController(ac *services.Base) Base {
+func CreateController(ac *mnc.Base) Base {
 	return BaseImpl{
 		apiConnector: ac,
 	}
 }
 
 func (c BaseImpl) Create(ctx echo.Context) error {
-	var message models.CreateBroadcast
+	var message mnc.CreateBroadcast
 
 	err := ctx.Bind(&message)
 	if err != nil {
@@ -38,7 +39,7 @@ func (c BaseImpl) Create(ctx echo.Context) error {
 }
 
 func (c BaseImpl) Monitor(ctx echo.Context) error {
-	var message models.GetTransaction
+	var message mnc.GetTransaction
 
 	hashMessage := ctx.Param("hash")
 	message.TxHash = hashMessage
