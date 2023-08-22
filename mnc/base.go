@@ -13,14 +13,14 @@ type Base interface {
 	Monitor(message *GetTransaction) (GetTransactionResponse, error)
 }
 
-type BaseImpl struct {
+type base struct {
 }
 
 func CreateAPIConnector() Base {
-	return BaseImpl{}
+	return base{}
 }
 
-func (b BaseImpl) Broadcast(message *CreateBroadcast) (response CreateBroadcastResponse, err error) {
+func (b base) Broadcast(message *CreateBroadcast) (response CreateBroadcastResponse, err error) {
 	if message == nil {
 		err = ErrNoInput
 
@@ -56,7 +56,7 @@ func (b BaseImpl) Broadcast(message *CreateBroadcast) (response CreateBroadcastR
 	return response, nil
 }
 
-func (b BaseImpl) Monitor(message *GetTransaction) (response GetTransactionResponse, err error) {
+func (b base) Monitor(message *GetTransaction) (response GetTransactionResponse, err error) {
 	if message == nil {
 		err = ErrNoInput
 		return

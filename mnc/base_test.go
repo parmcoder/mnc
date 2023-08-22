@@ -46,7 +46,7 @@ func TestBaseImpl_Broadcast(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			b := BaseImpl{}
+			b := base{}
 			gotResponse, err := b.Broadcast(tt.args.message)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("BaseImpl.Broadcast() error = %v, wantErr %v", err, tt.wantErr)
@@ -74,7 +74,7 @@ func TestBaseImpl_Monitor(t *testing.T) {
 
 	tests := []struct {
 		name         string
-		b            BaseImpl
+		b            base
 		args         args
 		wantResponse GetTransactionResponse
 		wantErr      bool
@@ -103,7 +103,7 @@ func TestBaseImpl_Monitor(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			b := BaseImpl{}
+			b := base{}
 			gotResponse, err := b.Monitor(tt.args.message)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("BaseImpl.Monitor() error = %v, wantErr %v", err, tt.wantErr)
