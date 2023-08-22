@@ -26,7 +26,7 @@ func CreateAPIConnector() Base {
 func (b BaseImpl) Broadcast(message *models.CreateBroadcast) (response models.CreateBroadcastResponse, err error) {
 	if message == nil {
 		err = configs.ErrNoInput
-		return
+		return response, err
 	}
 
 	url := fmt.Sprintf("%s/broadcast", configs.Node)

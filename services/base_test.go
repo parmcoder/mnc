@@ -4,6 +4,7 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/parmcoder/transaction-tracker/configs"
 	"github.com/parmcoder/transaction-tracker/models"
 )
 
@@ -32,8 +33,8 @@ func TestBaseImpl_Broadcast(t *testing.T) {
 			wantErr:      false,
 		},
 		{
-			name:         "Failed",
-			args:         args{message: &message1},
+			name:         "Failed - no input",
+			args:         args{message: nil},
 			wantResponse: models.CreateBroadcastResponse{},
 			wantErr:      true,
 		},
@@ -48,6 +49,53 @@ func TestBaseImpl_Broadcast(t *testing.T) {
 			}
 			if !reflect.DeepEqual(gotResponse, tt.wantResponse) {
 				t.Errorf("BaseImpl.Broadcast() = %v, want %v", gotResponse, tt.wantResponse)
+			}
+		})
+	}
+}
+
+func TestBaseImpl_Monitor(t *testing.T) {
+	type args struct {
+		message *models.GetTransaction
+	}
+
+	message1 := models.GetTransaction{
+		TxHash: "",
+	}
+
+	tests := []struct {
+		name         string
+		b            BaseImpl
+		args         args
+		wantResponse models.GetTransactionResponse
+		wantErr      bool
+	}{
+		// TODO: Add test cases.
+		{
+			name: "Success",
+			args: args{message: &message1},
+			wantResponse: models.GetTransactionResponse{
+				TxStatus: configs.DoNotExist,
+			},
+			wantErr: false,
+		},
+		{
+			name:         "Failed - no input",
+			args:         args{message: nil},
+			wantResponse: models.GetTransactionResponse{},
+			wantErr:      true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			b := BaseImpl{}
+			gotResponse, err := b.Monitor(tt.args.message)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("BaseImpl.Monitor() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(gotResponse, tt.wantResponse) {
+				t.Errorf("BaseImpl.Monitor() = %v, want %v", gotResponse, tt.wantResponse)
 			}
 		})
 	}
