@@ -1,7 +1,7 @@
 # Transaction-tracker
-Code Owner - Possawat Sanorkam (possawat.work@gmail.com)
-Date Submitted - 22-Aug-2023 10.40pm
-Github username - parmcoder
+- Code Owner - Possawat Sanorkam (possawat.work@gmail.com)
+- Date Submitted - 22-Aug-2023
+- Github username - parmcoder
 
 This submission consist of 2 parts
 1. server - the server that could handle requests
