@@ -9,6 +9,10 @@ This submission consist of 2 parts
 ## MNC - mock node client
 This is the module we used to connect to the server
 
+### Installation
+```bash
+go get github.com/parmcoder/mnc
+```
 ### Quick start
 ```go
     // This is how you can use the service to inject the dependency
